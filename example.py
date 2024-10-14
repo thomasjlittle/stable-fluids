@@ -147,7 +147,7 @@ def convert_to_bmp(frames):
         y_offset += (
             downscaled_image.height
         )  # Move the y offset by the height of the current image
-    concatenated_image.save("flow_v4.bmp")
+    concatenated_image.save("flow.bmp")
 
 
 def crop_frame(frame, border=20):
@@ -163,5 +163,5 @@ convert_to_bmp(frames)
 
 print("Saving simulation result.")
 frames[0].save(
-    "example2.gif", save_all=True, append_images=frames[1:], duration=20, loop=0
+    "example.gif", save_all=True, append_images=frames[1:], duration=20, loop=0
 )
