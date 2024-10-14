@@ -10,7 +10,7 @@ class Fluid:
         self.shape = shape
         self.dimensions = len(shape)
 
-        # Prototyping is simplified by dynamically 
+        # Prototyping is simplified by dynamically
         # creating advected quantities as needed.
         self.quantities = quantities
         for q in quantities:
@@ -21,7 +21,7 @@ class Fluid:
 
         laplacian = operator(shape, difference(2, pressure_order))
         self.pressure_solver = factorized(laplacian)
-        
+
         self.advect_order = advect_order
 
     def step(self):
@@ -31,10 +31,16 @@ class Fluid:
         # SciPy's spline filter introduces checkerboard divergence.
         # A linear blend of the filtered and unfiltered fields based
         # on some value epsilon eliminates this error.
-        def advect(field, filter_epsilon=10e-2, mode='constant'):
+        def advect(field, filter_epsilon=10e-2, mode="constant"):
             filtered = spline_filter(field, order=self.advect_order, mode=mode)
             field = filtered * (1 - filter_epsilon) + field * filter_epsilon
-            return map_coordinates(field, advection_map, prefilter=False, order=self.advect_order, mode=mode)
+            return map_coordinates(
+                field,
+                advection_map,
+                prefilter=False,
+                order=self.advect_order,
+                mode=mode,
+            )
 
         # Apply advection to each axis of the
         # velocity field and each user-defined quantity.
