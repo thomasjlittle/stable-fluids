@@ -8,6 +8,7 @@ class Flow:
         normal: np.array,
         visible: bool = True,
         inflow_velocity=0.5,
+        variable_velocity: bool = False,
         inflow_radius=4,
         inflow_start=0,
         inflow_duration=100,
@@ -16,6 +17,7 @@ class Flow:
         self.normal = normal
         self.visible = visible
         self.inflow_velocity = inflow_velocity
+        self.variable_velocity = variable_velocity
         self.inflow_radius = inflow_radius
         self.inflow_start = inflow_start
         self.inflow_duration = inflow_duration
